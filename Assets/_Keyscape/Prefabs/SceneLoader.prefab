@@ -60,6 +60,8 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: 4e367e98ce3d0814d97822722dba84ab, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -117,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ef798c02006e74b8a921254281a0e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionScreen: {fileID: 8717048666122446156}
+  transitionScreen: {fileID: 0}
 --- !u!1 &8717048666122446155
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +132,7 @@ GameObject:
   - component: {fileID: 8717048666122446159}
   - component: {fileID: 8717048666122446158}
   - component: {fileID: 8717048666122446157}
-  - component: {fileID: 8717048666122446156}
+  - component: {fileID: 8736101115192684351}
   m_Layer: 0
   m_Name: TransitionCanvas
   m_TagString: Untagged
@@ -202,6 +204,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!111 &8717048666122446157
 Animation:
   m_ObjectHideFlags: 0
@@ -219,7 +222,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &8717048666122446156
+--- !u!114 &8736101115192684351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,7 +231,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8717048666122446155}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdab65c4804a2da4b930af1b5fb2dc0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d7f189dd49062b4cb20112331d5555e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inAnimClip: ScaleIn
@@ -293,6 +296,8 @@ MonoBehaviour:
   m_Material: {fileID: 2100000, guid: 624bf203f803a6c49a00a0b16bc4cf1c, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

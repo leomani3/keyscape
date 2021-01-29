@@ -31,7 +31,6 @@ public class SceneLoader : MonoBehaviour
 
     private IEnumerator LoadSceneAsyncCoroutine(int sceneToLoadIndex)
     {
-        //Start fade in
         yield return new WaitForSeconds(transitionScreen.StartIn());
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoadIndex);
         asyncLoad.allowSceneActivation = true;
