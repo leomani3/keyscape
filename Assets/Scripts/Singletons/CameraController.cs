@@ -1,10 +1,6 @@
-using System;
 using Cinemachine;
 using DG.Tweening;
-using HomaGames.Internal.Utilities;
-using System.Collections;
 using UnityEngine;
-using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
