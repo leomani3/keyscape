@@ -12,10 +12,13 @@ public class GuardIA : MonoBehaviour
 
     private void Update()
     {
+        Vector3 endRayPoint = new Vector3(transform.position.x + raycastDistance * Mathf.Cos(coneAngle / 2 * Mathf.Deg2Rad), transform.position.y, transform.position.z + raycastDistance * Mathf.Sin(coneAngle / 2 * Mathf.Deg2Rad));
+        Debug.DrawLine(transform.position, endRayPoint); 
+        
+        Vector3 endRayPoint2 = new Vector3(transform.position.x + raycastDistance * Mathf.Cos(-coneAngle / 2 * Mathf.Deg2Rad), transform.position.y, transform.position.z + raycastDistance * Mathf.Sin(-coneAngle / 2 * Mathf.Deg2Rad));
+        Debug.DrawLine(transform.position, endRayPoint2); 
         for (int i = 0; i < rayNumber; i++)
         {
-            Vector3 endRayPoint = new Vector3(transform.rotation.x, transform.rotation.y - coneAngle, transform.rotation.z) * raycastDistance;
-            Debug.DrawLine(transform.position, endRayPoint);
             //Physics.Raycast(transform.position, endRayPoint - transform.position, raycastDistance);
         }
     }
