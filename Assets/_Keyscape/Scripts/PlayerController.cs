@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         PickUpCall.performed += _ => CheckPickUp();
+        GetComponent<SphereCollider>().radius = PickUpRadius;
     }
 
     private void OnEnable()
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
         PreviousPositions = new List<Vector3>();
     }
 
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, PickUpRadius);
@@ -70,6 +72,7 @@ public class PlayerController : MonoBehaviour
             Gizmos.DrawSphere(position, 0.05f);
         }
     }
+    */
 
     [ButtonMethod()]
     private void CheckPickUp()
@@ -90,6 +93,24 @@ public class PlayerController : MonoBehaviour
                     return;
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PickableItem"))
+        {
+            Outline tempOutline = other.GetComponentInParent<Outline>();
+            tempOutline.OutlineColor = new Color(1f, 0.9f, 0f);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("PickableItem"))
+        {
+            Outline tempOutline = other.GetComponentInParent<Outline>();
+            tempOutline.OutlineColor = Color.white;
         }
     }
 

@@ -13,6 +13,43 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.17063875, y: 0.029590381, z: 0.09790142}
   m_Center: {x: -0.0013405794, y: -0.002132998, z: -0.0024700596}
+--- !u!114 &-7194628548423427241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633406714080336260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024f643409b37f84580c2064031aea42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _seen: 0
+  _followPlayer: 0
+  spawnPosition: {fileID: 0}
+  levelManager: {fileID: 11400000, guid: 89dc760d8ef019d4bb3b8e2a66f48169, type: 2}
+  Player: {fileID: 0}
+  Score: 0
+  ID: 0
+--- !u!114 &7738458166566113118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2633406714080336260}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.8163534, b: 0, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &2903366718584661205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38,15 +75,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdcc8c67cdd155348b2621f81b50ec83, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2439775
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdcc8c67cdd155348b2621f81b50ec83, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0244
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdcc8c67cdd155348b2621f81b50ec83, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.988903
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdcc8c67cdd155348b2621f81b50ec83, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54,7 +91,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdcc8c67cdd155348b2621f81b50ec83, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fdcc8c67cdd155348b2621f81b50ec83, type: 3}
       propertyPath: m_LocalRotation.y
@@ -82,7 +119,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d9aed721e0bf66745a9cc082f0296287, type: 2}
     - target: {fileID: 919132149155446097, guid: fdcc8c67cdd155348b2621f81b50ec83, type: 3}
       propertyPath: m_Name
-      value: Pencil_Text
+      value: Pencil_Text Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fdcc8c67cdd155348b2621f81b50ec83, type: 3}
+      propertyPath: m_TagString
+      value: PickableItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fdcc8c67cdd155348b2621f81b50ec83, type: 3}
