@@ -1,8 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using MyBox;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private List<Vector3> PreviousPositions;
 
     public List<PickUpItem> ItemsQueue;
+    public Action OnMove;
 
     private void Awake()
     {
@@ -60,6 +61,16 @@ public class PlayerController : MonoBehaviour
         PreviousPositions = new List<Vector3>();
     }
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, PickUpRadius);
+
+        foreach (Vector3 position in PreviousPositions)
+        {
+            Gizmos.DrawSphere(position, 0.05f);
+        }
+    }
+
     [ButtonMethod()]
     private void CheckPickUp()
     {
@@ -74,6 +85,7 @@ public class PlayerController : MonoBehaviour
                     PickUpItem tempItem = collider.GetComponentInParent<PickUpItem>();
 
                     HandleNewItem(tempItem);
+                    Debug.Log($"Adding new item: {ItemsQueue.Count - 1}");
                     tempItem.AddPlayer(this, ItemsQueue.Count - 1);
                     return;
                 }
@@ -114,13 +126,19 @@ public class PlayerController : MonoBehaviour
 
         if (PreviousPositions.Count != 0 && Vector3.Distance(transform.position, PreviousPositions[PreviousPositions.Count - 1]) > DistanceBetween)
         {
-            PreviousPositions.Add(transform.position);
+            AddNewPosition(transform.position);
         }
 
         if (PreviousPositions.Count > StoreRange)
         {
             PreviousPositions.RemoveAt(0);
         }
+    }
+
+    private void AddNewPosition(Vector3 _position)
+    {
+        PreviousPositions.Add(_position);
+        OnMove?.Invoke();
     }
 
     public Vector3 RequestPosition(int id)

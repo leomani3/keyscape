@@ -21,7 +21,9 @@ public class LevelManager : MonoBehaviour
     {
         foreach (SpawnPosition spawnPosition in spawnPositions)
         {
-            Instantiate(pickupItemsPrefabs[Random.Range(0, pickupItemsPrefabs.Count)].gameObject, spawnPosition.transform.position, spawnPosition.transform.rotation);
+            GameObject item = Instantiate(pickupItemsPrefabs[Random.Range(0, pickupItemsPrefabs.Count)].gameObject, spawnPosition.transform.position, spawnPosition.transform.rotation);
+            
+            item.GetComponent<PickUpItem>().spawnPosition = spawnPosition;
             spawnPosition.IsTaken = true;
         }
     }
