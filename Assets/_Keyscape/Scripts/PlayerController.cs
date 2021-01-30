@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     private float PickUpRadius = 30f;
     [SerializeField]
     private float MaxSpeed = 100f;
+    [SerializeField]
+    private float MaxRotation = 40f;
+    [SerializeField]
+    private float RotationSpeed = 10f;
 
     [Separator("Queue Characteristics")]
     [SerializeField]
@@ -88,7 +92,6 @@ public class PlayerController : MonoBehaviour
                     PickUpItem tempItem = collider.GetComponentInParent<PickUpItem>();
 
                     HandleNewItem(tempItem);
-                    Debug.Log($"Adding new item: {ItemsQueue.Count - 1}");
                     tempItem.AddPlayer(this, ItemsQueue.Count - 1);
                     return;
                 }
@@ -140,11 +143,36 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        MovePlayer();
+        RotatePlayer();
+        CheckNewPositions();
+    }
+
+    private void MovePlayer()
+    {
         Vector2 currentInput = GetPlayerMovement();
 
         _rb.AddForce(new Vector3(currentInput.x * Speed, _rb.velocity.y, currentInput.y * Speed), ForceMode.VelocityChange);
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, MaxSpeed);
+    }
 
+    private void RotatePlayer()
+    {
+        /*Vector3 newEulers = new Vector3(_rb.velocity.y, _rb.velocity.z, _rb.velocity.x) * RotationSpeed;
+        newEulers = Vector3.ClampMagnitude(newEulers, MaxRotation);
+        Quaternion newRotation = Quaternion.Euler(newEulers);*/
+
+        /*Quaternion dirQ = Quaternion.LookRotation(_rb.velocity);
+        Quaternion slerp = Quaternion.Slerp(transform.rotation, dirQ, _rb.velocity.magnitude * RotationSpeed * Time.fixedDeltaTime);
+        _rb.MoveRotation(slerp);*/
+
+        /*
+        Quaternion target = Quaternion.LookRotation(_rb.velocity, transform.up);
+        _rb.rotation = target;*/
+    }
+
+    private void CheckNewPositions()
+    {
         if (PreviousPositions.Count == 0 || Vector3.Distance(transform.position, PreviousPositions[PreviousPositions.Count - 1]) > DistanceBetween)
         {
             AddNewPosition(transform.position);
@@ -164,7 +192,6 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 RequestPosition(int id)
     {
-        Debug.Log($"Returning position of {PreviousPositions.Count - 1 - id * Spacing}");
         return PreviousPositions[PreviousPositions.Count - 1 - id * Spacing];
     }
 
