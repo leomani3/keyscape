@@ -29,6 +29,6 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
-        winCanvas.SetActive(true);
+        loseCanvas.SetActive(true);
     }
 }
