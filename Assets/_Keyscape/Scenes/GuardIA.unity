@@ -328,6 +328,12 @@ MonoBehaviour:
   rayNumber: 2
   raycastDistance: 3
   coneAngle: 45
+  material: {fileID: 0}
+  _angleStep: 0
+  _points: []
+  _tris: 
+  _indexPoints: 0
+  _indexTris: 0
 --- !u!1 &1807888949
 GameObject:
   m_ObjectHideFlags: 0
