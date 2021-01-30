@@ -41,4 +41,15 @@ public class LevelManager : MonoBehaviour
 
         return nearestPos;
     }
+
+    public void SetPositionIsTaken(SpawnPosition spawnPos, bool b)
+    {
+        foreach (SpawnPosition spawnPosition in spawnPositions)
+        {
+            if (spawnPosition == spawnPos)
+            {
+                spawnPosition.IsTaken = b;
+            }
+        }
+    }
 }
