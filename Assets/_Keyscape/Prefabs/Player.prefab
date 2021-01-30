@@ -311,7 +311,7 @@ MonoBehaviour:
   PickUpRadius: 30
   MaxSpeed: 10
   StoreRange: 0
-  Spacing: 10
+  Spacing: 2
   DistanceBetween: 1
   PreviousPositions: []
   ItemsQueue: []

@@ -18,15 +18,7 @@ public class PickUpItem : MonoBehaviour
     public int ID;
 
     public Action<int> OnSeen;
-
-    private void Update()
-    {
-        if (_seen)
-        {
-            StopInteraction();
-            UnlinkPlayer();
-        }
-    }
+    public List<SpawnPosition> Hideouts;
 
     private void FixedUpdate()
     {
@@ -38,7 +30,7 @@ public class PickUpItem : MonoBehaviour
 
     private bool AbleToMove()
     {
-        return !_seen && Player != null;
+        return !_seen && _followPlayer;
     }
 
     private void Awake()
@@ -97,8 +89,13 @@ public class PickUpItem : MonoBehaviour
     [ButtonMethod()]
     public void SeenByGuard()
     {
-        _seen = true;
-        OnSeen?.Invoke(ID);
+        if (!_seen && _followPlayer)
+        {
+            _seen = true;
+            OnSeen?.Invoke(ID);
+            StopInteraction();
+            UnlinkPlayer();
+        }
     }
 
     [ButtonMethod()]
