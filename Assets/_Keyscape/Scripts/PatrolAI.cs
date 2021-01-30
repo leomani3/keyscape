@@ -35,12 +35,14 @@ public class PatrolAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.velocity = (_checkPoints[_currentCheckPoints].position - transform.position).normalized * speed;
+        Vector3 checkPointPos = new Vector3(_checkPoints[_currentCheckPoints].position.x, transform.position.y, _checkPoints[_currentCheckPoints].position.z);
         
-        Quaternion targetRotation = Quaternion.LookRotation(_checkPoints[_currentCheckPoints].position - transform.position, Vector3.up);
+        _rb.velocity = (checkPointPos - transform.position).normalized * speed;
+        
+        Quaternion targetRotation = Quaternion.LookRotation( new Vector3(checkPointPos.x, transform.position.y, checkPointPos.z) - transform.position, Vector3.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed);
         
-        if (Vector3.Distance(transform.position, _checkPoints[_currentCheckPoints].position) < 0.3f)
+        if (Vector3.Distance(transform.position, checkPointPos) < 0.1f)
         {
             NextCheckPoint();
         }
