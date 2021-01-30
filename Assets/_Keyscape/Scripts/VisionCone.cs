@@ -39,7 +39,7 @@ public class VisionCone : MonoBehaviour
         _indexPoints = 0;
         _indexTris = 0;
         
-        _points[0] = transform.parent.InverseTransformPoint(transform.parent.position);
+        _points[0] = transform.parent.InverseTransformPoint(new Vector3(transform.parent.position.x, 0.1f, transform.parent.position.z));
         _indexPoints++;
 
         if (rayNumber - 1 != 0)
@@ -50,12 +50,12 @@ public class VisionCone : MonoBehaviour
 
         for (int i = 0; i < rayNumber; i++)
         {
-            Vector3 rayPoint = new Vector3(transform.position.x + raycastDistance * Mathf.Cos((-coneAngle / 2 + (_angleStep * i) + 90 - transform.eulerAngles.y) * Mathf.Deg2Rad), transform.position.y, transform.position.z + raycastDistance * Mathf.Sin((-coneAngle / 2 + (_angleStep * i) + 90 - transform.eulerAngles.y) * Mathf.Deg2Rad));
+            Vector3 rayPoint = new Vector3(transform.position.x + raycastDistance * Mathf.Cos((-coneAngle / 2 + (_angleStep * i) + 90 - transform.eulerAngles.y) * Mathf.Deg2Rad), transform.position.y , transform.position.z + raycastDistance * Mathf.Sin((-coneAngle / 2 + (_angleStep * i) + 90 - transform.eulerAngles.y) * Mathf.Deg2Rad));
             if (Physics.Raycast(transform.position, rayPoint - transform.position, out _hit, raycastDistance))
             {
                 rayPoint = _hit.point;
             }
-            _points[_indexPoints] = transform.parent.InverseTransformPoint(rayPoint);
+            _points[_indexPoints] = transform.parent.InverseTransformPoint(new Vector3(rayPoint.x, 0.1f, rayPoint.z));
             _indexPoints++;
 
             if (i > 0)

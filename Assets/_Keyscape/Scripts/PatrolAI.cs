@@ -30,7 +30,7 @@ public class PatrolAI : MonoBehaviour
             _checkPoints.Add(checkPointsParent.transform.GetChild(i));
         }
         
-        transform.position = _checkPoints[0].position;
+        transform.position = new Vector3(_checkPoints[0].position.x, transform.position.y, _checkPoints[0].position.z);
     }
 
     private void FixedUpdate()
