@@ -2,35 +2,78 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MyBox;
 
 public class PlayerController : MonoBehaviour
 {
-    public float Speed = 30f;
-
+    [Separator("Player Bindings")]
     [SerializeField]
-    private InputAction ActionInput;
-    private Rigidbody rb;
+    private InputAction Movement;
+    [SerializeField]
+    private InputAction PickUpCall;
+
+    [Separator("Player Characteristics")]
+    [SerializeField]
+    private float Speed = 30f;
+    [SerializeField]
+    private int Score = 0;
+    [SerializeField]
+    private float PickUpRadius = 30f;
+
+    private Rigidbody _rb;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
-        ActionInput.Enable();
+        Movement.Enable();
     }
 
     private void OnDisable()
     {
-        ActionInput.Disable();
+        Movement.Disable();
+    }
+
+    [Application.isPlaying]
+    [ButtonMethod()]
+    private void CheckPickUp()
+    {
+        Collider[] objects = Physics.OverlapSphere(transform.position, PickUpRadius);
+
+        foreach(Collider collider in objects)
+        {
+            if (collider.CompareTag("PickableItem"))
+            {
+                if (collider.GetComponentInParent<PickUpItem>().Player == null)
+                {
+                    collider.GetComponentInParent<PickUpItem>().AddPlayer(GetComponent<PlayerController>());
+                    return;
+                }
+            }
+        }
+    }
+
+    private void Start()
+    {
     }
 
     private void Update()
     {
-        Vector2 currentInput = ActionInput.ReadValue<Vector2>();
+        Vector2 currentInput = GetPlayerMovement();
 
-        rb.velocity = new Vector3(currentInput.x, rb.velocity.y, currentInput.y) * Speed;
-        Debug.Log(ActionInput.ReadValue<Vector2>());
+        _rb.velocity = new Vector3(currentInput.x, _rb.velocity.y, currentInput.y) * Speed;
+    }
+
+    public Vector2 GetPlayerMovement()
+    {
+        return Movement.ReadValue<Vector2>();
+    }
+
+    public void ChangeScore(int _addScore)
+    {
+        Score += _addScore;
     }
 }

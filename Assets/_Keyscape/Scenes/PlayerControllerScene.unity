@@ -199,13 +199,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764591074}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 4.9, z: 0}
+  m_LocalScale: {x: 0, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1288417142}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1288417136
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,8 +240,8 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 84
+  m_Interpolate: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &1288417138
 MonoBehaviour:
@@ -255,55 +255,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27babfa76c5a04f4cb12e0bf8123c96b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  ActionInput:
-    m_Name: Action Input
+  Movement:
+    m_Name: Movement
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 9df6c62d-174e-4b0d-8ca9-7391d77e4252
+    m_Id: e76401a5-39b0-45e6-ae8c-c930d61518e3
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 2D Vector
-      m_Id: 2ae25871-c476-4cda-82c4-bc2dc579b2f4
+      m_Id: 84f30fbb-0693-47bc-84d3-a2b61de7b1a1
       m_Path: 2DVector
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Action Input
+      m_Action: Movement
       m_Flags: 4
     - m_Name: up
-      m_Id: 87115131-c40a-45ce-93d7-8755f711d247
+      m_Id: 8c33b50d-9b2c-4b13-9f6c-dc8a3d0a1244
       m_Path: <Keyboard>/w
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Action Input
+      m_Action: Movement
       m_Flags: 8
     - m_Name: down
-      m_Id: 4cb26665-f621-4c43-954c-c2ac185f554e
+      m_Id: f14e18d4-0bca-4268-bfa2-a0687f663804
       m_Path: <Keyboard>/s
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Action Input
+      m_Action: Movement
       m_Flags: 8
     - m_Name: left
-      m_Id: c0a2d9b9-0c64-4716-b4e0-a47ebba42936
+      m_Id: c0d04295-6490-4976-a729-49713fc4b383
       m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Action Input
+      m_Action: Movement
       m_Flags: 8
     - m_Name: right
-      m_Id: 99ca418d-3121-4161-8d92-32537a91dfc7
+      m_Id: 6b3b93f0-becc-4e7d-a67d-f4ff837f88c2
       m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Action Input
+      m_Action: Movement
       m_Flags: 8
+  PickUpCall:
+    m_Name: Pick Up Call
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ed31d23d-a9b7-4b2a-b39b-cd80eb2548da
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6da80d14-c62f-4f13-b808-207d417f8f6e
+      m_Path: <Keyboard>/e
+      m_Interactions: Hold
+      m_Processors: 
+      m_Groups: 
+      m_Action: Pick Up Call
+      m_Flags: 0
+  Speed: 10
+  Score: 0
+  PickUpRadius: 30
 --- !u!136 &1288417139
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -311,7 +329,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288417136}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 384214f7be79c8d409e6e0ea8b83937d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -377,9 +395,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 764591077}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1356287015
 GameObject:
@@ -394,9 +413,10 @@ GameObject:
   - component: {fileID: 1356287018}
   - component: {fileID: 1356287017}
   - component: {fileID: 1356287016}
+  - component: {fileID: 1356287021}
   m_Layer: 0
   m_Name: TestCube
-  m_TagString: Untagged
+  m_TagString: PickableItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -491,8 +511,24 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1356287021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356287015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024f643409b37f84580c2064031aea42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _seen: 0
+  _followPlayer: 0
+  Score: 10
+  Player: {fileID: 0}
 --- !u!1 &1367638693
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,11 +619,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367638693}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.69, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1919730939
 GameObject:
@@ -680,5 +716,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
