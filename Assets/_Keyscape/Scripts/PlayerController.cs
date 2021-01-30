@@ -2,35 +2,91 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using MyBox;
 
 public class PlayerController : MonoBehaviour
 {
-    public float Speed = 30f;
-
+    [Separator("Player Bindings")]
     [SerializeField]
-    private InputAction ActionInput;
-    private Rigidbody rb;
+    private InputAction Movement;
+    [SerializeField]
+    private InputAction PickUpCall;
+
+    [Separator("Player Characteristics")]
+    [SerializeField]
+    private float Speed = 30f;
+    [SerializeField]
+    private int Score = 0;
+    [SerializeField]
+    private float PickUpRadius = 30f;
+
+    private Rigidbody _rb;
+
+    public List<PickUpItem> ItemsQueue;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
+        PickUpCall.performed += _ => CheckPickUp();
     }
 
     private void OnEnable()
     {
-        ActionInput.Enable();
+        PickUpCall.Enable();
+        Movement.Enable();
     }
 
     private void OnDisable()
     {
-        ActionInput.Disable();
+        PickUpCall.Disable();
+        Movement.Disable();
+    }
+
+    private void Start()
+    {
+        ItemsQueue = new List<PickUpItem>();
+    }
+
+    [ButtonMethod()]
+    private void CheckPickUp()
+    {
+        Collider[] objects = Physics.OverlapSphere(transform.position, PickUpRadius);
+
+        foreach(Collider collider in objects)
+        {
+            if (collider.CompareTag("PickableItem"))
+            {
+                if (collider.GetComponentInParent<PickUpItem>().Player == null)
+                {
+                    PickUpItem tempItem = collider.GetComponentInParent<PickUpItem>();
+
+                    tempItem.AddPlayer(GetComponent<PlayerController>());
+                    ItemsQueue.Add(tempItem);
+                    return;
+                }
+            }
+        }
     }
 
     private void Update()
     {
-        Vector2 currentInput = ActionInput.ReadValue<Vector2>();
+        Vector2 currentInput = GetPlayerMovement();
 
-        rb.velocity = new Vector3(currentInput.x, rb.velocity.y, currentInput.y) * Speed;
-        Debug.Log(ActionInput.ReadValue<Vector2>());
+        _rb.velocity = new Vector3(currentInput.x, _rb.velocity.y, currentInput.y) * Speed;
+    }
+
+    public Vector2 GetPlayerMovement()
+    {
+        return Movement.ReadValue<Vector2>();
+    }
+
+    public void ChangeScore(int _addScore)
+    {
+        Score += _addScore;
+    }
+
+    public void DeleteItem(PickUpItem item)
+    {
+        ItemsQueue.Remove(item);
     }
 }
