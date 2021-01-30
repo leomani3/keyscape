@@ -26,14 +26,14 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public SpawnPosition GetNearestAvaiblePosition(PickUpItem item)
+    public SpawnPosition GetNearestAvailablePosition(PickUpItem item)
     {
         SpawnPosition nearestPos = null;
         Vector3 itemPos = item.transform.position;
 
         foreach (SpawnPosition spawnPosition in spawnPositions)
         {
-            if (nearestPos == null || Vector3.Distance(itemPos, spawnPosition.transform.position) < Vector3.Distance(itemPos, nearestPos.transform.position))
+            if (!spawnPosition.IsTaken && (nearestPos == null || Vector3.Distance(itemPos, spawnPosition.transform.position) < Vector3.Distance(itemPos, nearestPos.transform.position)))
             {
                 nearestPos = spawnPosition;
             }
