@@ -12,19 +12,13 @@ public class PickUpItem : MonoBehaviour
     [SerializeField]
     private bool _followPlayer = false;
 
+    public SpawnPosition spawnPosition;
+    public LevelManagerRef levelManager;
     public PlayerController Player;
     public int Score;
     public int ID;
 
     public Action<int> OnSeen;
-
-    private void FixedUpdate()
-    {
-        if (AbleToMove())
-        {
-            Move();
-        }
-    }
 
     private bool AbleToMove()
     {
@@ -38,10 +32,13 @@ public class PickUpItem : MonoBehaviour
 
     private void Move()
     {
-        Vector3 Target = Player.RequestPosition(ID);
+        if (AbleToMove())
+        {
+            Vector3 Target = Player.RequestPosition(ID);
 
-        _rb.AddForce((Target - transform.position).normalized * Player.GetSpeed(), ForceMode.VelocityChange);
-        _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, Player.GetMaxSpeed());
+            _rb.AddForce((Target - transform.position).normalized * Player.GetSpeed(), ForceMode.VelocityChange);
+            _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, Player.GetMaxSpeed());
+        }
     }
 
     private void StopInteraction()
@@ -49,6 +46,7 @@ public class PickUpItem : MonoBehaviour
         _rb.constraints = RigidbodyConstraints.None;
         _rb.freezeRotation = false;
         StopFollowing();
+        UnlinkPlayer();
         UnseenByGuard();
     }
 
@@ -74,12 +72,14 @@ public class PickUpItem : MonoBehaviour
     private void UnlinkPlayer()
     {
         Player.DeleteItem(this);
+        Player.OnMove -= Move;
         Player = null;
     }
 
-    public void HideToPlace(Vector3 hideout)
+    public void HideToPlace(SpawnPosition hideout)
     {
-        _rb.transform.DOMove(hideout, 5f);
+        _rb.transform.DOMove(hideout.transform.position, 1f).OnComplete(StopInteraction);
+        hideout.IsTaken = true;
     }
 
     public void AddPlayer(PlayerController _newPlayer, int _newID)
@@ -87,17 +87,21 @@ public class PickUpItem : MonoBehaviour
         ID = _newID;
         Player = _newPlayer;
         StartInteraction();
+        Player.OnMove += Move;
+
+        levelManager.levelManager.SetPositionIsTaken(spawnPosition, false);
+        spawnPosition = null;
     }
 
     [ButtonMethod()]
     public void SeenByGuard()
     {
-        if (!_seen && _followPlayer)
+        if (AbleToMove())
         {
             _seen = true;
+            spawnPosition = levelManager.levelManager.GetNearestAvailablePosition(this);
+            HideToPlace(spawnPosition);
             OnSeen?.Invoke(ID);
-            StopInteraction();
-            UnlinkPlayer();
         }
     }
 
