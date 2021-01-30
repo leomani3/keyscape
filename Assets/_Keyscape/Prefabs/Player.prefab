@@ -308,7 +308,7 @@ MonoBehaviour:
       m_Flags: 0
   Speed: 10
   Score: 0
-  PickUpRadius: 30
+  PickUpRadius: 3
   MaxSpeed: 10
   StoreRange: 0
   Spacing: 2
