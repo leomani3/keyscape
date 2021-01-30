@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(new Vector3(currentInput.x * Speed, _rb.velocity.y, currentInput.y * Speed), ForceMode.VelocityChange);
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, MaxSpeed);
 
-        if (PreviousPositions.Count != 0 && Vector3.Distance(transform.position, PreviousPositions[PreviousPositions.Count - 1]) > DistanceBetween)
+        if (PreviousPositions.Count == 0 || Vector3.Distance(transform.position, PreviousPositions[PreviousPositions.Count - 1]) > DistanceBetween)
         {
             AddNewPosition(transform.position);
         }
@@ -143,6 +143,7 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 RequestPosition(int id)
     {
+        Debug.Log($"Returning position of {PreviousPositions.Count - 1 - id * Spacing}");
         return PreviousPositions[PreviousPositions.Count - 1 - id * Spacing];
     }
 
