@@ -6,6 +6,7 @@ using DG.Tweening;
 public class PickUpItem : MonoBehaviour
 {
     private Rigidbody _rb;
+    private Outline _outline;
 
     [SerializeField]
     private bool _seen = false;
@@ -28,6 +29,7 @@ public class PickUpItem : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _outline = GetComponent<Outline>();
     }
 
     private void Move()
@@ -48,6 +50,7 @@ public class PickUpItem : MonoBehaviour
         StopFollowing();
         UnlinkPlayer();
         UnseenByGuard();
+        _outline.enabled = true;
     }
 
     private void StartInteraction()
@@ -55,6 +58,7 @@ public class PickUpItem : MonoBehaviour
         _rb.constraints = RigidbodyConstraints.FreezePositionY;
         _rb.freezeRotation = true;
         StartFollowing();
+        _outline.enabled = false;
     }
 
     private void ChangeScore(bool positive)
