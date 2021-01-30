@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     private int Score = 0;
     [SerializeField]
     private float PickUpRadius = 30f;
+    [SerializeField]
+    private float MaxSpeed = 100f;
 
     [Separator("Queue Characteristics")]
     [SerializeField]
@@ -79,13 +81,15 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Vector2 currentInput = GetPlayerMovement();
-
-        _rb.velocity = new Vector3(currentInput.x, _rb.velocity.y, currentInput.y) * Speed;
     }
 
     private void FixedUpdate()
     {
+        Vector2 currentInput = GetPlayerMovement();
+
+        _rb.AddForce(new Vector3(currentInput.x * Speed, _rb.velocity.y, currentInput.y * Speed), ForceMode.VelocityChange);
+        _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, MaxSpeed);
+
         if (PreviousPositions.Count != 0 && PreviousPositions[0] != transform.position)
         {
             PreviousPositions.Add(transform.position);
