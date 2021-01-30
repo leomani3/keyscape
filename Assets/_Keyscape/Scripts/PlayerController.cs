@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
         Movement.Disable();
     }
 
-    [Application.isPlaying]
     [ButtonMethod()]
     private void CheckPickUp()
     {
