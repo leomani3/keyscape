@@ -161,7 +161,6 @@ MonoBehaviour:
   Player: {fileID: 0}
   Score: 10
   ID: 0
-  Hideouts: []
 --- !u!54 &218499636
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -292,7 +291,6 @@ MonoBehaviour:
   Player: {fileID: 0}
   Score: 10
   ID: 0
-  Hideouts: []
 --- !u!54 &421728986
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -580,7 +578,6 @@ MonoBehaviour:
   Player: {fileID: 0}
   Score: 10
   ID: 0
-  Hideouts: []
 --- !u!1 &1367638693
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,10 +987,6 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 384214f7be79c8d409e6e0ea8b83937d, type: 2}
-    - target: {fileID: 6715678416430959485, guid: feef0a61a65db7148b2cf3681e5833ee, type: 3}
-      propertyPath: Spacing
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6715678416430959487, guid: feef0a61a65db7148b2cf3681e5833ee, type: 3}
       propertyPath: m_Name
       value: Player

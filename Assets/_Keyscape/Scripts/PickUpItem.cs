@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
 using System;
+using DG.Tweening;
 
 public class PickUpItem : MonoBehaviour
 {
@@ -18,7 +17,6 @@ public class PickUpItem : MonoBehaviour
     public int ID;
 
     public Action<int> OnSeen;
-    public List<SpawnPosition> Hideouts;
 
     private void FixedUpdate()
     {
@@ -77,6 +75,11 @@ public class PickUpItem : MonoBehaviour
     {
         Player.DeleteItem(this);
         Player = null;
+    }
+
+    public void HideToPlace(Vector3 hideout)
+    {
+        _rb.transform.DOMove(hideout, 5f);
     }
 
     public void AddPlayer(PlayerController _newPlayer, int _newID)
