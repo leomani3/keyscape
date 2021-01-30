@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class FinishZone : MonoBehaviour
 {
+    public int nbItemNeeded;
     public float validationTime;
+
+    private int currentValidatedItems = 0;
     private void OnTriggerEnter(Collider other)
     {
         PickUpItem item = other.GetComponent<PickUpItem>();
@@ -20,5 +23,10 @@ public class FinishZone : MonoBehaviour
     {
         item.transform.DOMove(transform.position, validationTime);
         item.transform.DOScale(0.01f, validationTime);
+        currentValidatedItems++;
+        if (currentValidatedItems >= nbItemNeeded)
+        {
+            GameManager.Instance.Win();
+        }
     }
 }
