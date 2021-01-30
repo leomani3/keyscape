@@ -22,19 +22,29 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody _rb;
 
+    public List<PickUpItem> ItemsQueue;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        PickUpCall.performed += _ => CheckPickUp();
     }
 
     private void OnEnable()
     {
+        PickUpCall.Enable();
         Movement.Enable();
     }
 
     private void OnDisable()
     {
+        PickUpCall.Disable();
         Movement.Disable();
+    }
+
+    private void Start()
+    {
+        ItemsQueue = new List<PickUpItem>();
     }
 
     [ButtonMethod()]
@@ -48,15 +58,14 @@ public class PlayerController : MonoBehaviour
             {
                 if (collider.GetComponentInParent<PickUpItem>().Player == null)
                 {
-                    collider.GetComponentInParent<PickUpItem>().AddPlayer(GetComponent<PlayerController>());
+                    PickUpItem tempItem = collider.GetComponentInParent<PickUpItem>();
+
+                    tempItem.AddPlayer(GetComponent<PlayerController>());
+                    ItemsQueue.Add(tempItem);
                     return;
                 }
             }
         }
-    }
-
-    private void Start()
-    {
     }
 
     private void Update()
@@ -74,5 +83,10 @@ public class PlayerController : MonoBehaviour
     public void ChangeScore(int _addScore)
     {
         Score += _addScore;
+    }
+
+    public void DeleteItem(PickUpItem item)
+    {
+        ItemsQueue.Remove(item);
     }
 }

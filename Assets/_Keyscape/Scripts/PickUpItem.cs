@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
 
 public class PickUpItem : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class PickUpItem : MonoBehaviour
     public int Score;
     public PlayerController Player;
 
-    void Update()
+    private void Update()
     {
         if (_seen)
         {
             StopFollowing();
+            UnlinkPlayer();
             UnseenByGuard();
         }
     }
@@ -33,17 +35,25 @@ public class PickUpItem : MonoBehaviour
         }
     }
 
+    private void UnlinkPlayer()
+    {
+        Player.DeleteItem(GetComponent<PickUpItem>());
+        Player = null;
+    }
+
     public void AddPlayer(PlayerController _newPlayer)
     {
         Player = _newPlayer;
         StartFollowing();
     }
 
+    [ButtonMethod()]
     public void SeenByGuard()
     {
         _seen = true;
     }
 
+    [ButtonMethod()]
     public void UnseenByGuard()
     {
         _seen = false;
