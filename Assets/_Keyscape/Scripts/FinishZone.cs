@@ -2,14 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class FinishZone : MonoBehaviour
 {
     public int nbItemNeeded;
     public float validationTime;
+    public TextMeshPro ui;
 
     private int currentValidatedItems = 0;
+
+    private void Awake()
+    {
+        UpdateUi();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         PickUpItem item = other.GetComponent<PickUpItem>();
@@ -28,5 +36,12 @@ public class FinishZone : MonoBehaviour
         {
             GameManager.Instance.Win();
         }
+
+        UpdateUi();
+    }
+
+    private void UpdateUi()
+    {
+        ui.text = currentValidatedItems.ToString() + " / " + nbItemNeeded.ToString();
     }
 }
