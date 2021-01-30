@@ -72,12 +72,13 @@ public class PickUpItem : MonoBehaviour
     private void UnlinkPlayer()
     {
         Player.DeleteItem(this);
+        Player.OnMove -= Move;
         Player = null;
     }
 
     public void HideToPlace(SpawnPosition hideout)
     {
-        _rb.transform.DOMove(hideout.transform.position, 1f).OnComplete(StopInteraction).SetEase(Ease.InExpo);
+        _rb.transform.DOMove(hideout.transform.position, 1f).OnComplete(StopInteraction);
         hideout.IsTaken = true;
     }
 
@@ -98,9 +99,9 @@ public class PickUpItem : MonoBehaviour
         if (AbleToMove())
         {
             _seen = true;
-            OnSeen?.Invoke(ID);
             spawnPosition = levelManager.levelManager.GetNearestAvailablePosition(this);
             HideToPlace(spawnPosition);
+            OnSeen?.Invoke(ID);
         }
     }
 
