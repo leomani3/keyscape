@@ -13,6 +13,43 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.17553207, y: 0.13106781, z: 0.12677547}
   m_Center: {x: -0.003139209, y: -0.000000026077032, z: -0.005808659}
+--- !u!114 &-1116247648757696880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047479788953546019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024f643409b37f84580c2064031aea42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _seen: 0
+  _followPlayer: 0
+  spawnPosition: {fileID: 0}
+  levelManager: {fileID: 11400000, guid: 89dc760d8ef019d4bb3b8e2a66f48169, type: 2}
+  Player: {fileID: 0}
+  Score: 0
+  ID: 0
+--- !u!114 &2266022187436736076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6047479788953546019}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.8163534, b: 0, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &6858312640018714738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38,15 +75,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c641c285ece92a418b0549c37a6a8c2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.2382057
+      value: 2.93
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c641c285ece92a418b0549c37a6a8c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2500001
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c641c285ece92a418b0549c37a6a8c2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.228176
+      value: 6.11
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c641c285ece92a418b0549c37a6a8c2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54,7 +91,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c641c285ece92a418b0549c37a6a8c2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c641c285ece92a418b0549c37a6a8c2, type: 3}
       propertyPath: m_LocalRotation.y
@@ -82,7 +119,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d9aed721e0bf66745a9cc082f0296287, type: 2}
     - target: {fileID: 919132149155446097, guid: 0c641c285ece92a418b0549c37a6a8c2, type: 3}
       propertyPath: m_Name
-      value: Mug_Text
+      value: Mug_Text Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0c641c285ece92a418b0549c37a6a8c2, type: 3}
+      propertyPath: m_TagString
+      value: PickableItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c641c285ece92a418b0549c37a6a8c2, type: 3}

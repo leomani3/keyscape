@@ -1,14 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
+    public TextMeshProUGUI countDownText;
     public LevelManagerRef levelManagerRef;
     public List<SpawnPosition> spawnPositions;
     public List<PickUpItem> pickupItemsPrefabs;
+    public float countDown;
 
     private void Awake()
     {
@@ -53,5 +56,19 @@ public class LevelManager : MonoBehaviour
                 spawnPosition.IsTaken = b;
             }
         }
+    }
+
+    private void Update()
+    {
+        countDown -= Time.deltaTime;
+        if (countDown <= 0)
+        {
+            countDown = 0;
+            GameManager.Instance.Lose();
+        }
+
+        int min = Mathf.FloorToInt(countDown / 60);
+        int seconds = Mathf.FloorToInt(countDown % 60);
+        countDownText.text = min + " : " + seconds;
     }
 }

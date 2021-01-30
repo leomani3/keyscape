@@ -13,6 +13,43 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.34427506, y: 0.06537657, z: 0.05461616}
   m_Center: {x: 0.14888543, y: 0.032653462, z: 0}
+--- !u!114 &-8759076442873510645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329432197855294516}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.8163534, b: 0, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &8771822211964460357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329432197855294516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 024f643409b37f84580c2064031aea42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _seen: 0
+  _followPlayer: 0
+  spawnPosition: {fileID: 0}
+  levelManager: {fileID: 11400000, guid: 89dc760d8ef019d4bb3b8e2a66f48169, type: 2}
+  Player: {fileID: 0}
+  Score: 0
+  ID: 0
 --- !u!1001 &599833102360021349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38,15 +75,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39b445a905a49344da5f3680820e19b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6603
+      value: -0.44000006
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39b445a905a49344da5f3680820e19b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.0899236
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39b445a905a49344da5f3680820e19b7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.988653
+      value: -1.4063454
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39b445a905a49344da5f3680820e19b7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54,7 +91,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39b445a905a49344da5f3680820e19b7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 39b445a905a49344da5f3680820e19b7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -82,7 +119,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4e9110f00fdff9c479aa93609d9df8bd, type: 2}
     - target: {fileID: 919132149155446097, guid: 39b445a905a49344da5f3680820e19b7, type: 3}
       propertyPath: m_Name
-      value: Ecouteurs (1)
+      value: Ecouteurs (1) Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 39b445a905a49344da5f3680820e19b7, type: 3}
+      propertyPath: m_TagString
+      value: PickableItem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39b445a905a49344da5f3680820e19b7, type: 3}
