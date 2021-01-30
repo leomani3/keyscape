@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
+using System;
 
 public class PickUpItem : MonoBehaviour
 {
     private Rigidbody _rb;
-    private int _id;
 
     [SerializeField]
     private bool _seen = false;
@@ -15,6 +15,9 @@ public class PickUpItem : MonoBehaviour
 
     public PlayerController Player;
     public int Score;
+    public int ID;
+
+    public Action<int> OnSeen;
 
     private void Update()
     {
@@ -45,9 +48,10 @@ public class PickUpItem : MonoBehaviour
 
     private void Move()
     {
-        Vector3 Target = Player.RequestPosition(_id);
+        Vector3 Target = Player.RequestPosition(ID);
 
-        _rb.MovePosition(Target);
+        _rb.AddForce((Target - transform.position).normalized * Player.GetSpeed(), ForceMode.VelocityChange);
+        _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, Player.GetMaxSpeed());
     }
 
     private void StopInteraction()
@@ -85,7 +89,7 @@ public class PickUpItem : MonoBehaviour
 
     public void AddPlayer(PlayerController _newPlayer, int _newID)
     {
-        _id = _newID;
+        ID = _newID;
         Player = _newPlayer;
         StartInteraction();
     }
@@ -94,6 +98,7 @@ public class PickUpItem : MonoBehaviour
     public void SeenByGuard()
     {
         _seen = true;
+        OnSeen?.Invoke(ID);
     }
 
     [ButtonMethod()]

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6715678415883149290}
   - component: {fileID: 6715678415883149291}
   - component: {fileID: 6715678415883149292}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6715678415883149293}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 4.9, z: 0}
+  m_LocalRotation: {x: 0.42542177, y: -0, z: -0, w: 0.90499526}
+  m_LocalPosition: {x: 0, y: 6.86, z: -6.57}
   m_LocalScale: {x: 0, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6715678416430959481}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50.355, y: 0, z: 0}
 --- !u!20 &6715678415883149291
 Camera:
   m_ObjectHideFlags: 0
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 6715678416430959484}
   - component: {fileID: 6715678416430959485}
   - component: {fileID: 6715678416430959486}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,13 +306,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Pick Up Call
       m_Flags: 0
-  PreviousPositions: []
-  Speed: 2
+  Speed: 10
   Score: 0
   PickUpRadius: 30
   MaxSpeed: 10
-  StoreRange: 10
-  Spacing: 1
+  StoreRange: 0
+  Spacing: 10
+  DistanceBetween: 1
+  PreviousPositions: []
   ItemsQueue: []
 --- !u!54 &6715678416430959486
 Rigidbody:

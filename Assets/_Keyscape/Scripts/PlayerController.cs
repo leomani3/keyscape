@@ -13,8 +13,6 @@ public class PlayerController : MonoBehaviour
     private InputAction Movement;
     [SerializeField]
     private InputAction PickUpCall;
-    [SerializeField]
-    private List<Vector3> PreviousPositions;
 
     [Separator("Player Characteristics")]
     [SerializeField]
@@ -31,6 +29,10 @@ public class PlayerController : MonoBehaviour
     private float StoreRange;
     [SerializeField]
     private int Spacing;
+    [SerializeField]
+    private float DistanceBetween;
+    [SerializeField]
+    private List<Vector3> PreviousPositions;
 
     public List<PickUpItem> ItemsQueue;
 
@@ -71,16 +73,36 @@ public class PlayerController : MonoBehaviour
                 {
                     PickUpItem tempItem = collider.GetComponentInParent<PickUpItem>();
 
-                    tempItem.AddPlayer(this, ItemsQueue.Count);
-                    ItemsQueue.Add(tempItem);
+                    HandleNewItem(tempItem);
+                    tempItem.AddPlayer(this, ItemsQueue.Count - 1);
                     return;
                 }
             }
         }
     }
 
-    private void Update()
+    private void UpdateIDs(int seenID)
     {
+        for(int i = seenID + 1; i < ItemsQueue.Count; i++)
+        {
+            ItemsQueue[i].ID -= 1; 
+        }
+    }
+
+    private void HandleNewItem(PickUpItem tempItem)
+    {
+        if (StoreRange < (ItemsQueue.Count + 1) * Spacing)
+        {
+            for (int i = 0; i < (ItemsQueue.Count + 1) * Spacing - StoreRange; i++)
+            {
+                PreviousPositions.Add(transform.position);
+            }
+
+            StoreRange += (ItemsQueue.Count + 1) * Spacing - StoreRange;
+        }
+
+        tempItem.OnSeen += UpdateIDs;
+        ItemsQueue.Add(tempItem);
     }
 
     private void FixedUpdate()
@@ -90,20 +112,30 @@ public class PlayerController : MonoBehaviour
         _rb.AddForce(new Vector3(currentInput.x * Speed, _rb.velocity.y, currentInput.y * Speed), ForceMode.VelocityChange);
         _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, MaxSpeed);
 
-        if (PreviousPositions.Count != 0 && PreviousPositions[0] != transform.position)
+        if (PreviousPositions.Count != 0 && Vector3.Distance(transform.position, PreviousPositions[PreviousPositions.Count - 1]) > DistanceBetween)
         {
             PreviousPositions.Add(transform.position);
         }
 
         if (PreviousPositions.Count > StoreRange)
         {
-            PreviousPositions.RemoveAt(PreviousPositions.Count);
+            PreviousPositions.RemoveAt(0);
         }
     }
 
     public Vector3 RequestPosition(int id)
     {
-        return PreviousPositions[id * Spacing];
+        return PreviousPositions[PreviousPositions.Count - 1 - id * Spacing];
+    }
+
+    public float GetSpeed()
+    {
+        return Speed;
+    }
+
+    public float GetMaxSpeed()
+    {
+        return MaxSpeed;
     }
 
     public Vector2 GetPlayerMovement()
@@ -118,6 +150,10 @@ public class PlayerController : MonoBehaviour
 
     public void DeleteItem(PickUpItem item)
     {
+        StoreRange -= Spacing;
+        item.OnSeen -= UpdateIDs;
+
+        PreviousPositions.RemoveRange(0, Spacing);
         ItemsQueue.Remove(item);
     }
 }
