@@ -6,11 +6,15 @@ using MyBox;
 
 public class PlayerController : MonoBehaviour
 {
+    private Rigidbody _rb;
+
     [Separator("Player Bindings")]
     [SerializeField]
     private InputAction Movement;
     [SerializeField]
     private InputAction PickUpCall;
+    [SerializeField]
+    private List<Vector3> PreviousPositions;
 
     [Separator("Player Characteristics")]
     [SerializeField]
@@ -20,7 +24,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float PickUpRadius = 30f;
 
-    private Rigidbody _rb;
+    [Separator("Queue Characteristics")]
+    [SerializeField]
+    private float StoreRange;
+    [SerializeField]
+    private int Spacing;
 
     public List<PickUpItem> ItemsQueue;
 
@@ -45,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         ItemsQueue = new List<PickUpItem>();
+        PreviousPositions = new List<Vector3>();
     }
 
     [ButtonMethod()]
@@ -60,7 +69,7 @@ public class PlayerController : MonoBehaviour
                 {
                     PickUpItem tempItem = collider.GetComponentInParent<PickUpItem>();
 
-                    tempItem.AddPlayer(GetComponent<PlayerController>());
+                    tempItem.AddPlayer(this, ItemsQueue.Count);
                     ItemsQueue.Add(tempItem);
                     return;
                 }
@@ -73,6 +82,24 @@ public class PlayerController : MonoBehaviour
         Vector2 currentInput = GetPlayerMovement();
 
         _rb.velocity = new Vector3(currentInput.x, _rb.velocity.y, currentInput.y) * Speed;
+    }
+
+    private void FixedUpdate()
+    {
+        if (PreviousPositions.Count != 0 && PreviousPositions[0] != transform.position)
+        {
+            PreviousPositions.Add(transform.position);
+        }
+
+        if (PreviousPositions.Count > StoreRange)
+        {
+            PreviousPositions.RemoveAt(PreviousPositions.Count);
+        }
+    }
+
+    public Vector3 RequestPosition(int id)
+    {
+        return PreviousPositions[id * Spacing];
     }
 
     public Vector2 GetPlayerMovement()

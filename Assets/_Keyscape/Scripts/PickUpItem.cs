@@ -5,22 +5,64 @@ using MyBox;
 
 public class PickUpItem : MonoBehaviour
 {
+    private Rigidbody _rb;
+    private int _id;
+
     [SerializeField]
     private bool _seen = false;
     [SerializeField]
     private bool _followPlayer = false;
 
-    public int Score;
     public PlayerController Player;
+    public int Score;
 
     private void Update()
     {
         if (_seen)
         {
-            StopFollowing();
+            StopInteraction();
             UnlinkPlayer();
-            UnseenByGuard();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (AbleToMove())
+        {
+            Move();
+        }
+    }
+
+    private bool AbleToMove()
+    {
+        return !_seen && Player != null;
+    }
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
+
+    private void Move()
+    {
+        Vector3 Target = Player.RequestPosition(_id);
+
+        _rb.MovePosition(Target);
+    }
+
+    private void StopInteraction()
+    {
+        _rb.constraints = RigidbodyConstraints.None;
+        _rb.freezeRotation = false;
+        StopFollowing();
+        UnseenByGuard();
+    }
+
+    private void StartInteraction()
+    {
+        _rb.constraints = RigidbodyConstraints.FreezePositionY;
+        _rb.freezeRotation = true;
+        StartFollowing();
     }
 
     private void ChangeScore(bool positive)
@@ -37,14 +79,15 @@ public class PickUpItem : MonoBehaviour
 
     private void UnlinkPlayer()
     {
-        Player.DeleteItem(GetComponent<PickUpItem>());
+        Player.DeleteItem(this);
         Player = null;
     }
 
-    public void AddPlayer(PlayerController _newPlayer)
+    public void AddPlayer(PlayerController _newPlayer, int _newID)
     {
+        _id = _newID;
         Player = _newPlayer;
-        StartFollowing();
+        StartInteraction();
     }
 
     [ButtonMethod()]
