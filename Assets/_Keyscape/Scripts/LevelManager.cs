@@ -13,10 +13,12 @@ public class LevelManager : MonoBehaviour
     public List<PickUpItem> pickupItemsPrefabs;
     public float countDown;
 
+    private float cleanStuff;
+
     private void Awake()
     {
         levelManagerRef.levelManager = this;
-
+        cleanStuff = countDown;
         SpawnPickUpItems();
     }
 
@@ -68,7 +70,7 @@ public class LevelManager : MonoBehaviour
         countDown -= Time.deltaTime;
         if (countDown <= 0)
         {
-            countDown = 0;
+            countDown = cleanStuff;
             GameManager.Instance.Lose();
         }
 

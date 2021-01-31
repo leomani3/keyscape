@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
         winCanvas.SetActive(true);
     }
 
+    [ButtonMethod()]
     public void Lose()
     {
         LoadScene(PlayerPrefs.GetInt("ActiveScene"));
