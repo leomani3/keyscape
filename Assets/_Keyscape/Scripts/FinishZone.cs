@@ -30,7 +30,7 @@ public class FinishZone : MonoBehaviour
     private void Validate(PickUpItem item)
     {
         item.transform.DOMove(transform.position, validationTime);
-        item.transform.DOScale(0.01f, validationTime);
+        item.transform.DOScale(0.01f, validationTime).OnComplete(() => DisableItem(item));
         currentValidatedItems++;
         if (currentValidatedItems >= nbItemNeeded)
         {
@@ -38,6 +38,11 @@ public class FinishZone : MonoBehaviour
         }
 
         UpdateUi();
+    }
+
+    private void DisableItem(PickUpItem item)
+    {
+        item.gameObject.SetActive(false);
     }
 
     private void UpdateUi()

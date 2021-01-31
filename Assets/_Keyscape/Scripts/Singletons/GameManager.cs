@@ -17,13 +17,18 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         DontDestroyOnLoad(gameObject);
-        
+
+
         winCanvas.SetActive(false);
         loseCanvas.SetActive(false);
     }
 
     public void Win()
     {
+        Debug.Log($"Current Scene ID: {PlayerPrefs.GetInt("ActiveScene")}");
+
+        PlayerPrefs.SetInt("ActiveScene", PlayerPrefs.GetInt("ActiveScene") + 1);
+        SceneLoader.Instance.LoadSceneAsync(PlayerPrefs.GetInt("ActiveScene"));
         winCanvas.SetActive(true);
     }
 

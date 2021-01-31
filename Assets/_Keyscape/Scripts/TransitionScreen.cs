@@ -10,10 +10,9 @@ public class TransitionScreen : MonoBehaviour
 
     private Animation anim;
 
-    public void Init()
+    public void Awake()
     {
         anim = GetComponent<Animation>();
-        gameObject.SetActive(false);
     }
 
     public float StartIn()

@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkPointsParent: {fileID: 0}
-  speed: 5
+  speed: 1.5
   patrolType: 0
   rotationSpeed: 0.1
 --- !u!54 &6247738903054282615
