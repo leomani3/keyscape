@@ -20,6 +20,11 @@ public class LevelManager : MonoBehaviour
         SpawnPickUpItems();
     }
 
+    private void Start()
+    {
+        GameManager.Instance.ResetCanvas();
+    }
+
     private void SpawnPickUpItems()
     {
         foreach (SpawnPosition spawnPosition in spawnPositions)

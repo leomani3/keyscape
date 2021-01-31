@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using MyBox;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -21,15 +19,28 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        ResetCanvas();
         DontDestroyOnLoad(gameObject);
-
-        winCanvas.SetActive(false);
-        loseCanvas.SetActive(false);
     }
 
+    private void LoadScene(int sceneID)
+    {
+        Debug.Log($"Loading {sceneID}");
+        SceneLoader.Instance.LoadSceneAsync(sceneID);
+    }
+
+    [ButtonMethod()]
     public void Win()
     {
-        PlayerPrefs.SetInt("ActiveScene", PlayerPrefs.GetInt("ActiveScene") + 1);
+        if (PlayerPrefs.GetInt("ActiveScene") + 1 > 4)
+        {
+            PlayerPrefs.SetInt("ActiveScene", 0);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("ActiveScene", PlayerPrefs.GetInt("ActiveScene") + 1);
+        }
+
         LoadScene(PlayerPrefs.GetInt("ActiveScene"));
         winCanvas.SetActive(true);
     }
@@ -40,9 +51,9 @@ public class GameManager : MonoBehaviour
         loseCanvas.SetActive(true);
     }
 
-    private void LoadScene(int sceneID)
+    public void ResetCanvas()
     {
-        Debug.Log($"Loading {sceneID}");
-        SceneLoader.Instance.LoadSceneAsync(sceneID);
+        winCanvas.SetActive(false);
+        loseCanvas.SetActive(false);
     }
 }
