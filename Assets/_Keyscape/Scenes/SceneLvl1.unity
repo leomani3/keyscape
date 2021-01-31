@@ -14845,7 +14845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7944765051619786597, guid: 2066b0fc591e5a84b8548b82f5767b82, type: 3}
       propertyPath: spawnPositions.Array.size
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7944765051619786597, guid: 2066b0fc591e5a84b8548b82f5767b82, type: 3}
       propertyPath: spawnPositions.Array.data[0]
@@ -14854,27 +14854,27 @@ PrefabInstance:
     - target: {fileID: 7944765051619786597, guid: 2066b0fc591e5a84b8548b82f5767b82, type: 3}
       propertyPath: spawnPositions.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2037234771}
     - target: {fileID: 7944765051619786597, guid: 2066b0fc591e5a84b8548b82f5767b82, type: 3}
       propertyPath: spawnPositions.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 608957682}
     - target: {fileID: 7944765051619786597, guid: 2066b0fc591e5a84b8548b82f5767b82, type: 3}
       propertyPath: spawnPositions.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 320906193}
     - target: {fileID: 7944765051619786597, guid: 2066b0fc591e5a84b8548b82f5767b82, type: 3}
       propertyPath: spawnPositions.Array.data[4]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1013574108}
     - target: {fileID: 7944765051619786597, guid: 2066b0fc591e5a84b8548b82f5767b82, type: 3}
       propertyPath: spawnPositions.Array.data[5]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1224362241}
     - target: {fileID: 7944765051619786597, guid: 2066b0fc591e5a84b8548b82f5767b82, type: 3}
       propertyPath: spawnPositions.Array.data[6]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2040067325}
     - target: {fileID: 7944765051619786597, guid: 2066b0fc591e5a84b8548b82f5767b82, type: 3}
       propertyPath: spawnPositions.Array.data[7]
       value: 
