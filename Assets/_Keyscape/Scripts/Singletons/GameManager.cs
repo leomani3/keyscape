@@ -16,8 +16,12 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        DontDestroyOnLoad(gameObject);
+        else
+        {
+            Destroy(gameObject);
+        }
 
+        DontDestroyOnLoad(gameObject);
 
         winCanvas.SetActive(false);
         loseCanvas.SetActive(false);
@@ -25,15 +29,20 @@ public class GameManager : MonoBehaviour
 
     public void Win()
     {
-        Debug.Log($"Current Scene ID: {PlayerPrefs.GetInt("ActiveScene")}");
-
         PlayerPrefs.SetInt("ActiveScene", PlayerPrefs.GetInt("ActiveScene") + 1);
-        SceneLoader.Instance.LoadSceneAsync(PlayerPrefs.GetInt("ActiveScene"));
+        LoadScene(PlayerPrefs.GetInt("ActiveScene"));
         winCanvas.SetActive(true);
     }
 
     public void Lose()
     {
+        LoadScene(PlayerPrefs.GetInt("ActiveScene"));
         loseCanvas.SetActive(true);
+    }
+
+    private void LoadScene(int sceneID)
+    {
+        Debug.Log($"Loading {sceneID}");
+        SceneLoader.Instance.LoadSceneAsync(sceneID);
     }
 }
