@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
     private List<Vector3> PreviousPositions;
 
     public List<PickUpItem> ItemsQueue;
-    public Action OnMove;
 
     private void Awake()
     {
@@ -187,7 +186,6 @@ public class PlayerController : MonoBehaviour
     private void AddNewPosition(Vector3 _position)
     {
         PreviousPositions.Add(_position);
-        OnMove?.Invoke();
     }
 
     public Vector3 RequestPosition(int id)
