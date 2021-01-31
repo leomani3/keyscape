@@ -17120,7 +17120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6715678416430959485, guid: feef0a61a65db7148b2cf3681e5833ee, type: 3}
       propertyPath: Speed
-      value: 0.8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6715678416430959485, guid: feef0a61a65db7148b2cf3681e5833ee, type: 3}
       propertyPath: Spacing
