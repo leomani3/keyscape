@@ -40,7 +40,7 @@ public class VisionCone : MonoBehaviour
         _indexPoints = 0;
         _indexTris = 0;
         
-        _points[0] = transform.parent.InverseTransformPoint(new Vector3(transform.parent.position.x, transform.parent.position.y - (transform.parent.lossyScale.y) + 0.1f, transform.parent.position.z));
+        _points[0] = transform.parent.InverseTransformPoint(new Vector3(transform.parent.position.x, transform.parent.position.y + 0.1f, transform.parent.position.z));
         _indexPoints++;
 
         if (rayNumber - 1 != 0)
@@ -64,7 +64,7 @@ public class VisionCone : MonoBehaviour
                 }
                 rayPoint = _hit.point;
             }
-            _points[_indexPoints] = transform.parent.InverseTransformPoint(new Vector3(rayPoint.x, transform.parent.position.y - (transform.parent.lossyScale.y) + 0.1f, rayPoint.z));
+            _points[_indexPoints] = transform.parent.InverseTransformPoint(new Vector3(rayPoint.x, transform.parent.position.y + 0.1f, rayPoint.z));
             _indexPoints++;
 
             if (i > 0)
