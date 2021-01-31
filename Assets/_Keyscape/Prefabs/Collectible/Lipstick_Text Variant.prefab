@@ -27,7 +27,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.07745682, z: 0.019021139}
+  m_Size: {x: 0.02, y: 2, z: 0.019021139}
   m_Center: {x: -0.00000002188608, y: 0.024738044, z: 0.0000000027939677}
 --- !u!114 &-5179676862675583159
 MonoBehaviour:
@@ -43,7 +43,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _seen: 0
   _followPlayer: 0
-  _speedMultiplier: 1
   spawnPosition: {fileID: 0}
   levelManager: {fileID: 11400000, guid: 89dc760d8ef019d4bb3b8e2a66f48169, type: 2}
   Player: {fileID: 0}

@@ -12,8 +12,8 @@ TagManager:
   - PickableLayer
   - Water
   - UI
-  - 
-  - 
+  - VisionCone
+  - Player
   - 
   - 
   - 

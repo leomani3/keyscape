@@ -8,6 +8,6 @@ public class SpawnPosition : MonoBehaviour
 
     private void Start()
     {
-        IsTaken = false;
+
     }
 }

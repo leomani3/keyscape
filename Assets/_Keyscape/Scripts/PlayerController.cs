@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("PickableItem"))
+        if (other.CompareTag("PickableItem") && other.GetComponent<PickUpItem>().Player == null)
         {
             Outline tempOutline = other.GetComponentInParent<Outline>();
             tempOutline.OutlineColor = new Color(1f, 0.9f, 0f);

@@ -7,6 +7,7 @@ public class PickUpItem : MonoBehaviour
 {
     private Rigidbody _rb;
     private Outline _outline;
+    private float previousYPOS;
 
     [SerializeField]
     private bool _seen = false;
@@ -45,7 +46,7 @@ public class PickUpItem : MonoBehaviour
 
     private void StopInteraction()
     {
-        _rb.constraints = RigidbodyConstraints.None;
+        _rb.velocity = Vector3.zero;
         _rb.freezeRotation = false;
         StopFollowing();
         UnlinkPlayer();
@@ -90,6 +91,7 @@ public class PickUpItem : MonoBehaviour
         ID = _newID;
         Player = _newPlayer;
         StartInteraction();
+        transform.position = new Vector3(transform.position.x, _newPlayer.gameObject.transform.position.y, transform.position.z);
 
         levelManager.levelManager.SetPositionIsTaken(spawnPosition, false);
         spawnPosition = null;
