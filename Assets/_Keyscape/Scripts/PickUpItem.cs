@@ -12,6 +12,8 @@ public class PickUpItem : MonoBehaviour
     private bool _seen = false;
     [SerializeField]
     private bool _followPlayer = false;
+    [SerializeField]
+    private float _speedMultiplier = 2f;
 
     public SpawnPosition spawnPosition;
     public LevelManagerRef levelManager;
@@ -38,7 +40,7 @@ public class PickUpItem : MonoBehaviour
         {
             Vector3 Target = Player.RequestPosition(ID);
 
-            _rb.AddForce((Target - transform.position).normalized * Player.GetSpeed(), ForceMode.VelocityChange);
+            _rb.AddForce((Target - transform.position).normalized * Player.GetSpeed() * _speedMultiplier, ForceMode.VelocityChange);
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, Player.GetMaxSpeed());
         }
     }
