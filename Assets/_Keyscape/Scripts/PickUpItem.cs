@@ -19,6 +19,9 @@ public class PickUpItem : MonoBehaviour
     public PlayerController Player;
     public int Score;
     public int ID;
+    public AudioClip pickedUpAudio;
+
+    private AudioSource _audioSource;
 
     public Action<int> OnSeen;
 
@@ -29,6 +32,9 @@ public class PickUpItem : MonoBehaviour
 
     private void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.clip = pickedUpAudio;
+        
         _rb = GetComponent<Rigidbody>();
         _outline = GetComponent<Outline>();
     }
@@ -88,6 +94,8 @@ public class PickUpItem : MonoBehaviour
 
     public void AddPlayer(PlayerController _newPlayer, int _newID)
     {
+        _audioSource.Play();
+        
         ID = _newID;
         Player = _newPlayer;
         StartInteraction();
