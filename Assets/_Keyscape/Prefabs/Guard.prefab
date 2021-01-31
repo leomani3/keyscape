@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 6247738903111672855}
   - component: {fileID: 6247738903111672854}
   - component: {fileID: 6247738903111672852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Vision Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,6 +229,9 @@ MonoBehaviour:
   raycastDistance: 8
   coneAngle: 90
   material: {fileID: 2100000, guid: 6904da920a5c8364e9d54e23545d9789, type: 2}
+  IgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 128
   _angleStep: 0
   _points: []
   _tris: 

@@ -7,13 +7,12 @@ public class PickUpItem : MonoBehaviour
 {
     private Rigidbody _rb;
     private Outline _outline;
+    private float previousYPOS;
 
     [SerializeField]
     private bool _seen = false;
     [SerializeField]
     private bool _followPlayer = false;
-    [SerializeField]
-    private float _speedMultiplier = 2f;
 
     public SpawnPosition spawnPosition;
     public LevelManagerRef levelManager;
@@ -34,20 +33,20 @@ public class PickUpItem : MonoBehaviour
         _outline = GetComponent<Outline>();
     }
 
-    private void Move()
+    private void FixedUpdate()
     {
         if (AbleToMove())
         {
             Vector3 Target = Player.RequestPosition(ID);
 
-            _rb.AddForce((Target - transform.position).normalized * Player.GetSpeed() * _speedMultiplier, ForceMode.VelocityChange);
+            _rb.AddForce((Target - transform.position).normalized * Player.GetSpeed(), ForceMode.VelocityChange);
             _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, Player.GetMaxSpeed());
         }
     }
 
     private void StopInteraction()
     {
-        _rb.constraints = RigidbodyConstraints.None;
+        _rb.velocity = Vector3.zero;
         _rb.freezeRotation = false;
         StopFollowing();
         UnlinkPlayer();
@@ -78,7 +77,6 @@ public class PickUpItem : MonoBehaviour
     private void UnlinkPlayer()
     {
         Player.DeleteItem(this);
-        Player.OnMove -= Move;
         Player = null;
     }
 
@@ -93,7 +91,7 @@ public class PickUpItem : MonoBehaviour
         ID = _newID;
         Player = _newPlayer;
         StartInteraction();
-        Player.OnMove += Move;
+        transform.position = new Vector3(transform.position.x, _newPlayer.gameObject.transform.position.y, transform.position.z);
 
         levelManager.levelManager.SetPositionIsTaken(spawnPosition, false);
         spawnPosition = null;

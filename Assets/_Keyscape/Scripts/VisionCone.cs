@@ -10,6 +10,7 @@ public class VisionCone : MonoBehaviour
     [SerializeField] private float raycastDistance;
     [SerializeField] private float coneAngle;
     [SerializeField] private Material material;
+    [SerializeField] private LayerMask IgnoreLayer;
 
     private MeshRenderer _meshRenderer;
     private MeshFilter _meshFilter;
@@ -54,7 +55,7 @@ public class VisionCone : MonoBehaviour
             Vector3 rayPoint = new Vector3(transform.position.x + raycastDistance * Mathf.Cos((-coneAngle / 2 + (_angleStep * i) + 90 - transform.eulerAngles.y) * Mathf.Deg2Rad), transform.position.y , transform.position.z + raycastDistance * Mathf.Sin((-coneAngle / 2 + (_angleStep * i) + 90 - transform.eulerAngles.y) * Mathf.Deg2Rad));
             Ray ray = new Ray(transform.position - new Vector3(0, transform.lossyScale.y, 0), rayPoint - transform.position);
             //Debug.DrawRay(ray.origin, ray.direction * raycastDistance, Color.magenta);
-            if (Physics.Raycast(ray, out _hit, raycastDistance))
+            if (Physics.Raycast(ray, out _hit, raycastDistance, ~IgnoreLayer))
             {
                 PickUpItem item = _hit.collider.GetComponent<PickUpItem>();
                 if (item != null)

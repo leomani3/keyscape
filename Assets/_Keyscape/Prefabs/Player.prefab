@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6715678415883149290}
   - component: {fileID: 6715678415883149291}
   - component: {fileID: 6715678415883149292}
+  - component: {fileID: 859497425}
   m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -25,8 +26,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6715678415883149293}
-  m_LocalRotation: {x: 0.42542177, y: -0, z: -0, w: 0.90499526}
-  m_LocalPosition: {x: 0, y: 6.86, z: -6.57}
+  m_LocalRotation: {x: 0.42261395, y: -0.004080986, z: 0.001902995, w: 0.90629864}
+  m_LocalPosition: {x: -0.06, y: 9.1, z: -7.72}
   m_LocalScale: {x: 0, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6715678416430959481}
@@ -83,6 +84,40 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6715678415883149293}
   m_Enabled: 1
+--- !u!114 &859497425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715678415883149293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6715678416430959487
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +162,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6715678416430959487}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -5546940888850326318, guid: d98b0601e4f1a614ca253c9113791a2e, type: 3}
 --- !u!23 &6715678416430959483
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -176,7 +211,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6715678416430959487}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c00ce605be5c7fd459c20444ceab51ea, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -307,10 +342,12 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Pick Up Call
       m_Flags: 0
-  Speed: 10
+  Speed: 1
   Score: 0
   PickUpRadius: 3
-  MaxSpeed: 10
+  MaxSpeed: 3
+  MaxRotation: 0.1
+  RotationSpeed: 1
   StoreRange: 0
   Spacing: 2
   DistanceBetween: 1
