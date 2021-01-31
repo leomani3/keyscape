@@ -50,7 +50,7 @@ public class PickUpItem : MonoBehaviour
         }
     }
 
-    private void StopInteraction()
+    public void StopInteraction()
     {
         _rb.velocity = Vector3.zero;
         _rb.freezeRotation = false;

@@ -42,6 +42,7 @@ public class FinishZone : MonoBehaviour
 
     private void DisableItem(PickUpItem item)
     {
+        item.StopInteraction();
         item.gameObject.SetActive(false);
     }
 
